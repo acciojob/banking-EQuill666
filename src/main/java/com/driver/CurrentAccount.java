@@ -1,5 +1,7 @@
 package com.driver;
 
+import java.util.Arrays;
+
 public class CurrentAccount extends BankAccount{
     String tradeLicenseId; //consists of Uppercase English characters only
 
@@ -35,8 +37,16 @@ public class CurrentAccount extends BankAccount{
                 break;
             }
         }
-        if(!flag){
-            throw new Exception("Valid License can not be generated");
+        if(flag){
+            return;
+        }
+
+        char[] licenseArr = tradeLicenseId.toCharArray();
+        Arrays.sort(licenseArr);
+        for(int i = 1; i<licenseArr.length; i++){
+            if(licenseArr[i] == licenseArr[i+1]){
+                throw new Exception("Valid License can not be generated");
+            }
         }
     }
 
