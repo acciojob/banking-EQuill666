@@ -5,14 +5,10 @@ import java.util.Arrays;
 public class CurrentAccount extends BankAccount{
     String tradeLicenseId; //consists of Uppercase English characters only
 
-    public CurrentAccount(String name, double balance, String tradeLicenseId) throws Exception {
+    public CurrentAccount(String name, double balance, double minBalance, String tradeLicenseId) throws Exception {
         // minimum balance is 5000 by default. If balance is less than 5000, throw "Insufficient Balance" exception
-        super(name, balance, 5000);
+        super(name, balance, minBalance);
         this.tradeLicenseId = tradeLicenseId;
-
-        if(balance < 5000){
-            throw new Exception("Insufficient Balance");
-        }
     }
 
     public String getTradeLicenseId() {
@@ -24,6 +20,12 @@ public class CurrentAccount extends BankAccount{
     }
 
 
+    public CurrentAccount(String name, double balance, String tradeLicenseId)throws Exception{
+        super(name, balance, 5000);
+        if(balance < 5000){
+            throw new Exception("Insufficient Balance");
+        }
+    }
     public void validateLicenseId() throws Exception {
         // A trade license Id is said to be valid if no two consecutive characters are same
         // If the license Id is valid, do nothing
